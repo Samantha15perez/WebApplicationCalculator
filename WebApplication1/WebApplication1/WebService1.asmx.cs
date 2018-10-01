@@ -54,15 +54,27 @@ namespace WebApplication1
         }
 
         [WebMethod]
-        public int HexCalculator(int DecimalInput)
+        public string HexCalculator(int DecimalInput)
         {
-            return DecimalInput;
+            return DecimalInput.ToString("X");
         }
 
         [WebMethod]
-        public int OctalCalculator(int DecimalInput)
+        public string OctalCalculator(int DecimalInput)
         {
-            return DecimalInput;
+            int x = DecimalInput;
+            int rem = 0;
+            string result = string.Empty;
+
+            while (x > 0)
+            {
+                rem = x % 8;
+                x = x / 8;
+                result = rem.ToString() + result;
+            
+            }
+
+            return result;
         }
     }
 }
