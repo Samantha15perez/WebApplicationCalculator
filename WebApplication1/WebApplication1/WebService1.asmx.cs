@@ -24,46 +24,48 @@ namespace WebApplication1
         }
 
         [WebMethod]
-        public int BinaryCalculator(int DecimalInput)
+        public long BinaryCalculator(long DecimalInput)
         {
             try
             {
 
-            
-            int x = DecimalInput;
-            string binary = "";
 
-            while (x >= 1)
-            {
-                if (x % 2 == 1)
+                long x = DecimalInput;
+                string binary = "";
+
+                while (x >= 1)
                 {
-                    binary = binary + "1";
-                }else if (x % 2 == 0)
-                {
-                    binary = binary + "0";
+                    if (x % 2 == 1)
+                    {
+                        binary = binary + "1";
+                    }
+                    else if (x % 2 == 0)
+                    {
+                        binary = binary + "0";
+                    }
+
+                    x = x / 2;
                 }
+                return long.Parse(ReverseString(binary));
 
-                x = x / 2;
             }
-            return int.Parse(ReverseString(binary));
-
-            }catch (Exception ex)
+            catch (Exception ex)
             {
                 throw new System.ArgumentException(ex.Message);
             }
         }
 
         [WebMethod]
-        public string HexCalculator(int DecimalInput)
+        public string HexCalculator(long DecimalInput)
         {
             return DecimalInput.ToString("X");
         }
 
         [WebMethod]
-        public string OctalCalculator(int DecimalInput)
+        public string OctalCalculator(long DecimalInput)
         {
-            int x = DecimalInput;
-            int rem = 0;
+            long x = DecimalInput;
+            long rem = 0;
             string result = string.Empty;
 
             while (x > 0)
@@ -71,10 +73,61 @@ namespace WebApplication1
                 rem = x % 8;
                 x = x / 8;
                 result = rem.ToString() + result;
-            
+
             }
 
             return result;
+        }
+
+        [WebMethod]
+        public string FullCalculator(long DecimalInput)
+        {
+            string returnstring = "";
+
+            try
+            {
+
+
+                long x = DecimalInput;
+                string binary = "";
+
+                while (x >= 1)
+                {
+                    if (x % 2 == 1)
+                    {
+                        binary = binary + "1";
+                    }
+                    else if (x % 2 == 0)
+                    {
+                        binary = binary + "0";
+                    }
+
+                    x = x / 2;
+                }
+
+                long y = DecimalInput;
+                long rem = 0;
+                string result = string.Empty;
+
+                while (y > 0)
+                {
+                    rem = y % 8;
+                    y = y / 8;
+                    result = rem.ToString() + result;
+
+                }
+
+
+                returnstring = returnstring + "Binary: "+ ReverseString(binary) + ", Hexadecimal: " + DecimalInput.ToString("X") + ", Octal: " + result;
+                
+            }
+            catch
+            {
+
+            }
+
+            return returnstring;
+
         }
     }
 }
